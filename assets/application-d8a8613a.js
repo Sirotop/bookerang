@@ -103,18 +103,30 @@ function loadBooks() {
 function toggleReturn(bookId) {
     const transaction = db.transaction(["books"], "readwrite");
     const store = transaction.objectStore("books");
-    const card = document.querySelector(`.book-card[data-id="${bookId}"]`);
-    card.classList.add('slide-out');
 
-    setTimeout(() => {
-        store.delete(bookId);
-        card.remove();
-        const remainingBooks = document.querySelectorAll('.book-card');
-        if (remainingBooks.length === 0) {
-            const bookList = document.getElementById('bookList');
-            bookList.innerHTML = '<p style="text-align: center; padding: 2rem; color: #B85042; opacity: 0.7;">No books added yet</p>';
-        }
-    }, 300);
+    const getRequest = store.get(bookId);
+
+    getRequest.onsuccess = () => {
+        const book = getRequest.result;
+
+        // Delete the book from storage instead of marking it returned
+        const deleteRequest = store.delete(bookId);
+
+        // Animate the card
+        const card = document.querySelector(`.book-card[data-id="${bookId}"]`);
+        card.classList.add('slide-out');
+
+        // Remove the card after animation
+        setTimeout(() => {
+            card.remove();
+            // Check if there are any books left
+            const remainingBooks = document.querySelectorAll('.book-card');
+            if (remainingBooks.length === 0) {
+                const bookList = document.getElementById('bookList');
+                bookList.innerHTML = '<p style="text-align: center; padding: 2rem; color: #B85042; opacity: 0.7;">No books added yet</p>';
+            }
+        }, 300);
+    };
 }
 
 // Initialize event listeners
