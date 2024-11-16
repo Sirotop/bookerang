@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bookerang</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-    <meta name="theme-color" content="#B85042">
-    
-    <link rel="stylesheet" href="assets/application-8b441ae0.css">
-  </head>
-  <body>
-    <header class="header">
-      <h1>Bookerang</h1>
-      <button class="add-button">+ Add Book</button>
-    </header>
+<head>
+  <title>Bookerang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <div id="bookList">
-      <p style="text-align: center; padding: 2rem; color: #B85042;">No books added yet</p>
-    </div>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#B85042">
 
-    <script src="assets/application-d8a8613a.js" defer></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('service-worker.js');
-        });
-      }
-    </script>
-  </body>
-</html>
+  <link rel="stylesheet" href="assets/application-8b441ae0.css">
+</head>
+<body>
+<header class="header">
+  <h1>Bookerang</h1>
+  <button class="add-button">+ Add Book</button>
+</header>
+
+<div id="bookList">
+  <p style="text-align: center; padding: 2rem; color: #B85042;">No books added yet</p>
+</div>
+
+<script src="assets/application-d8a8613a.js" defer></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js');
+    });
+  }
+</script>
+</body>
