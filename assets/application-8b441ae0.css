@@ -126,6 +126,21 @@ body {
     display: flex;
     justify-content: space-between;
 }
+.return-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #B85042;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    transition: all 0.3s ease;
+}
 
 .return-button svg {
     width: 14px;
