@@ -127,6 +127,28 @@ body {
     justify-content: space-between;
 }
 
+.return-button svg {
+    width: 14px;
+    height: 14px;
+    stroke: #B85042;
+    stroke-width: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.return-button:hover {
+    background: rgba(184, 80, 66, 0.1);
+}
+
+.book-card.returned .return-button {
+    background: #B85042;
+}
+
+.book-card.returned .return-button svg {
+    opacity: 1;
+    stroke: #E7E8D1;
+}
+
 /* Add form */
 .add-form {
     position: fixed;
