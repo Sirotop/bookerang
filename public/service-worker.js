@@ -4,19 +4,22 @@ const ASSETS_TO_CACHE = [
     './index.html',
     './manifest.json',
     // Android icons
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png',
-    '/icons/maskable-icon-192x192.png',
-    '/icons/maskable-icon-512x512.png',
+    '/assets/icons/icon-192x192.png',
+    '/assets/icons/icon-512x512.png',
+    '/assets/icons/maskable-icon-192x192.png',
+    '/assets/icons/maskable-icon-512x512.png',
     // iOS icons
-    '/icons/apple-touch-icon.png',
-    '/icons/apple-touch-icon-180x180.png',
+    '/assets/icons/apple-touch-icon.png',
+    '/assets/icons/apple-touch-icon-180x180.png',
     // Favicons
-    '/icons/favicon-16x16.png',
-    '/icons/favicon-32x32.png',
+    '/assets/icons/favicon-16x16.png',
+    '/assets/icons/favicon-32x32.png',
+    '/assets/icons/favicon.ico',
+    // Application assets
+    '/assets/application-8b441ae0.css',
+    '/assets/application-d8a8613a.js'
 ];
 
-// Install event: cache all static assets
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -38,7 +41,6 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Your existing activate event handler remains the same
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys()
@@ -59,7 +61,6 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Modified fetch event handler with improved offline experience
 self.addEventListener('fetch', (event) => {
     // Skip cross-origin requests
     if (!event.request.url.startsWith(self.location.origin)) {
@@ -72,7 +73,7 @@ self.addEventListener('fetch', (event) => {
     }
 
     // Special handling for icon requests
-    if (event.request.url.includes('/icons/')) {
+    if (event.request.url.includes('/assets/icons/')) {
         event.respondWith(
             caches.match(event.request)
                 .then((cachedResponse) => {
@@ -94,7 +95,7 @@ self.addEventListener('fetch', (event) => {
                         })
                         .catch(() => {
                             // For failed icon requests, return a default icon if available
-                            return caches.match('/icons/icon-192x192.png');
+                            return caches.match('/assets/icons/icon-192x192.png');
                         });
                 })
         );
@@ -157,38 +158,4 @@ self.addEventListener('fetch', (event) => {
                     });
             })
     );
-});
-
-// Your existing message event handler remains the same
-self.addEventListener('message', (event) => {
-    if (event.data === 'skipWaiting') {
-        self.skipWaiting();
-    }
-});
-
-// Modified push notification handler with better icon handling
-self.addEventListener('push', (event) => {
-    if (event.data) {
-        const options = {
-            body: event.data.text(),
-            icon: '/icons/notification-icon-96x96.png',
-            badge: '/icons/notification-icon-72x72.png',
-            vibrate: [100, 50, 100],
-            data: {
-                dateOfArrival: Date.now(),
-                primaryKey: 1
-            }
-        };
-
-        event.waitUntil(
-            self.registration.showNotification('Bookerang', options)
-        );
-    }
-});
-
-// Your existing sync event handler remains the same
-self.addEventListener('sync', (event) => {
-    if (event.tag === 'sync-books') {
-        event.waitUntil(Promise.resolve());
-    }
 });
