@@ -11,73 +11,14 @@
     <link rel="stylesheet" href="assets/application-8b441ae0.css">
   </head>
   <body>
-    <script src="assets/application-d8a8613a.js" defer></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('service-worker.js');
-        });
-      }
-    </script>
-  </body>
-</html>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Bookerang</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-    <meta name="theme-color" content="#B85042">
-    
-    <link rel="stylesheet" href="assets/application-8b441ae0.css">
-  </head>
-  <body>
     <header class="header">
       <h1>Bookerang</h1>
-      <button class="add-button" onclick="showAddForm()">+ Add Book</button>
+      <button class="add-button">+ Add Book</button>
     </header>
 
-    <div class="sync-buttons">
-      <button class="sync-button" onclick="exportData()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="17 8 12 3 7 8"/>
-          <line x1="12" y1="3" x2="12" y2="15"/>
-        </svg>
-        Export
-      </button>
-      <button class="sync-button" onclick="showImportDialog()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        Import
-      </button>
+    <div id="bookList">
+      <p style="text-align: center; padding: 2rem; color: #B85042;">No books added yet</p>
     </div>
-
-    <main class="book-list" id="bookList"></main>
-
-    <form class="add-form" id="addForm">
-      <div class="form-group">
-        <label for="title">Book Title</label>
-        <input type="text" id="title" required>
-      </div>
-      <div class="form-group">
-        <label for="borrower">Borrower Name</label>
-        <input type="text" id="borrower" required>
-      </div>
-      <div class="form-group">
-        <label for="loanDate">Loan Date</label>
-        <input type="date" id="loanDate" required>
-      </div>
-      <div class="form-actions">
-        <button type="button" class="cancel-button" onclick="hideAddForm()">Cancel</button>
-        <button type="submit" class="save-button">Save</button>
-      </div>
-    </form>
 
     <script src="assets/application-d8a8613a.js" defer></script>
     <script>
